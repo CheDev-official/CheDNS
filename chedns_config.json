@@ -1,0 +1,9 @@
+{
+  "records": {},
+  "blocked": [],
+  "internet_enabled": true,
+  "upstream_dns": "8.8.8.8",
+  "listen_ip": "0.0.0.0",
+  "dns_port": 53,
+  "web_port": 8080
+}
