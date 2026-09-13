@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CheDNS — Панель управления</title>
+<title>CheDNS — панель управления</title>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/favicon.ico">
@@ -44,7 +44,7 @@
     min-height: 100vh;
   }
 
-  /* -------- Фон -------- */
+  /* Фон */
   .bg-effects {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     z-index: 0; overflow: hidden; pointer-events: none;
@@ -73,21 +73,19 @@
     50% { transform: translate(40px,-40px) scale(1.12); }
   }
 
-  /* -------- Экран загрузки -------- */
+  /* Загрузка */
   .loader-screen {
     position: fixed; inset: 0; z-index: 100;
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
     transition: opacity .5s ease, visibility .5s ease;
-    gap: 28px;
-    pointer-events: none;
+    gap: 28px; pointer-events: none;
   }
   .loader-screen.hidden { opacity: 0; visibility: hidden; }
 
   .spinner-wrap { position: relative; width: 96px; height: 96px; }
   .spinner-ring {
-    position: absolute; inset: 0;
-    border-radius: 50%;
+    position: absolute; inset: 0; border-radius: 50%;
     border: 3px solid transparent;
     border-top-color: var(--accent-cyan);
     border-right-color: var(--accent-blue);
@@ -95,16 +93,14 @@
   }
   .spinner-ring::after {
     content: ''; position: absolute; inset: 10px;
-    border-radius: 50%;
-    border: 3px solid transparent;
+    border-radius: 50%; border: 3px solid transparent;
     border-top-color: var(--accent-green);
     animation: spin 1.6s linear infinite reverse;
   }
   .spinner-dot {
     position: absolute; top: 50%; left: 50%;
     width: 10px; height: 10px;
-    background: var(--accent-cyan);
-    border-radius: 50%;
+    background: var(--accent-cyan); border-radius: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 0 0 20px var(--accent-cyan), 0 0 40px var(--accent-cyan);
     animation: pulse-dot 1.4s ease-in-out infinite;
@@ -117,46 +113,30 @@
 
   .loader-text {
     font-size: 15px; color: var(--text-muted);
-    letter-spacing: 0.3px;
     display: flex; align-items: center; gap: 4px;
   }
   .loader-text .dots::after { content: ''; animation: dots 1.5s steps(4) infinite; }
   @keyframes dots {
-    0%   { content: ''; }
-    25%  { content: '.'; }
-    50%  { content: '..'; }
-    75%  { content: '...'; }
-    100% { content: ''; }
+    0% { content: ''; } 25% { content: '.'; }
+    50% { content: '..'; } 75% { content: '...'; } 100% { content: ''; }
   }
-
-  .loader-status {
-    font-size: 13px;
-    color: var(--text-dim);
-    min-height: 18px;
-    text-align: center;
-    padding: 0 20px;
-  }
+  .loader-status { font-size: 13px; color: var(--text-dim); text-align: center; padding: 0 20px; }
   .loader-status.error { color: var(--accent-red); }
   .loader-status.ok { color: var(--accent-green); }
 
-  /* -------- Панель -------- */
+  /* Панель */
   .panel-wrap {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    max-width: 520px;
+    position: relative; z-index: 1;
+    width: 100%; max-width: 520px;
     transition: max-width .6s cubic-bezier(0.16,1,0.3,1),
                 opacity .5s ease,
                 transform .5s cubic-bezier(0.16,1,0.3,1);
-    opacity: 0;
-    transform: scale(0.96);
+    opacity: 0; transform: scale(0.96);
   }
   .panel-wrap.visible { opacity: 1; transform: scale(1); }
   .panel-wrap.expanded { max-width: 75vw; }
 
-  @media (max-width: 900px) {
-    .panel-wrap.expanded { max-width: 100%; }
-  }
+  @media (max-width: 900px) { .panel-wrap.expanded { max-width: 100%; } }
   @media (max-width: 600px) {
     body { padding: 12px; align-items: flex-start; padding-top: 20px; }
     .panel-wrap, .panel-wrap.expanded { max-width: 100%; }
@@ -172,7 +152,7 @@
     overflow: hidden;
   }
 
-  /* -------- Шапка -------- */
+  /* Шапка */
   .header {
     display: flex; align-items: center; gap: 14px;
     padding: 24px 28px 18px;
@@ -188,7 +168,23 @@
   .title-block h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
   .title-block .subtitle { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
 
-  .header-actions { margin-left: auto; display: flex; gap: 8px; }
+  .header-actions { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+
+  .user-info {
+    font-size: 12px;
+    color: var(--text-muted);
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .user-info::before {
+    content: '👤';
+    font-size: 12px;
+  }
 
   .icon-btn {
     width: 36px; height: 36px;
@@ -199,10 +195,12 @@
     color: var(--text-muted);
     cursor: pointer;
     transition: all .15s;
+    text-decoration: none;
   }
   .icon-btn:hover { background: rgba(255,255,255,0.08); color: var(--text-main); }
+  .icon-btn.logout:hover { background: rgba(239,68,68,0.15); color: var(--accent-red); border-color: rgba(239,68,68,0.3); }
 
-  /* -------- Статус интернета -------- */
+  /* Статус-баннер */
   .status-banner {
     display: flex; align-items: center; gap: 14px;
     padding: 14px 18px;
@@ -250,10 +248,9 @@
   .toggle.off { background: rgba(255,255,255,0.12); }
   .toggle.off::after { transform: translateX(22px); }
 
-  /* -------- Вкладки -------- */
+  /* Вкладки */
   .tabs {
-    display: flex;
-    gap: 4px;
+    display: flex; gap: 4px;
     padding: 20px 28px 0;
     border-bottom: 1px solid var(--border);
     position: relative;
@@ -282,8 +279,7 @@
     content: '';
     position: absolute;
     left: 12px; right: 12px;
-    bottom: -1px;
-    height: 2px;
+    bottom: -1px; height: 2px;
     border-radius: 2px 2px 0 0;
     background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
     transform: scaleX(0);
@@ -292,8 +288,21 @@
     box-shadow: 0 0 12px rgba(59,130,246,0.5);
   }
   .tab.active::after { transform: scaleX(1); }
+  .tab .badge-warn {
+    display: inline-block;
+    width: 6px; height: 6px;
+    background: var(--accent-red);
+    border-radius: 50%;
+    margin-left: 6px;
+    box-shadow: 0 0 8px var(--accent-red);
+    animation: pulse-badge 1.5s infinite;
+  }
+  @keyframes pulse-badge {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
 
-  /* -------- Контент вкладок (плавная анимация высоты) -------- */
+  /* Контент вкладок */
   .tab-content {
     padding: 22px 28px 28px;
     display: grid;
@@ -302,29 +311,25 @@
                 opacity .35s ease,
                 padding .35s ease,
                 transform .35s cubic-bezier(0.16,1,0.3,1);
-    opacity: 1;
-    transform: translateY(0);
-    overflow: hidden;
+    opacity: 1; transform: translateY(0); overflow: hidden;
   }
   .tab-content:not(.active) {
     grid-template-rows: 0fr;
     opacity: 0;
-    padding-top: 0;
-    padding-bottom: 0;
+    padding-top: 0; padding-bottom: 0;
     transform: translateY(8px);
     pointer-events: none;
   }
   .tab-content.active {
     grid-template-rows: 1fr;
     opacity: 1;
-    padding-top: 22px;
-    padding-bottom: 28px;
+    padding-top: 22px; padding-bottom: 28px;
     transform: translateY(0);
     pointer-events: auto;
   }
   .tab-inner { min-height: 0; }
 
-  /* -------- Секции -------- */
+  /* Секции */
   .section {
     background: rgba(0,0,0,0.2);
     border: 1px solid var(--border);
@@ -334,8 +339,7 @@
   }
   .section:last-child { margin-bottom: 0; }
   .section-title {
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 13px; font-weight: 600;
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -373,9 +377,9 @@
     box-shadow: 0 6px 20px rgba(0,0,0,0.5);
   }
 
-  /* -------- Формы -------- */
+  /* Формы */
   .form-row { display: flex; gap: 8px; flex-wrap: wrap; }
-  input[type=text] {
+  input[type=text], input[type=password], textarea, select {
     flex: 1; min-width: 140px;
     padding: 11px 14px;
     border-radius: 10px;
@@ -386,12 +390,21 @@
     font-family: inherit;
     transition: border-color .2s, box-shadow .2s;
   }
-  input[type=text]:focus {
+  input:focus, textarea:focus, select:focus {
     outline: none;
     border-color: var(--accent-blue);
     box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
   }
-  input::placeholder { color: var(--text-dim); }
+  input::placeholder, textarea::placeholder { color: var(--text-dim); }
+
+  textarea {
+    width: 100%;
+    min-height: 140px;
+    resize: vertical;
+    font-family: ui-monospace, "SF Mono", Consolas, monospace;
+    font-size: 12px;
+    line-height: 1.5;
+  }
 
   .btn {
     padding: 11px 18px;
@@ -405,11 +418,24 @@
     cursor: pointer;
     transition: all .2s;
     white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
   }
   .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(59,130,246,0.35); }
   .btn:active { transform: translateY(0); }
   .btn.danger { background: linear-gradient(135deg, #ef4444, #dc2626); }
   .btn.danger:hover { box-shadow: 0 6px 20px rgba(239,68,68,0.4); }
+  .btn.green { background: linear-gradient(135deg, #10b981, #06b6d4); }
+  .btn.green:hover { box-shadow: 0 6px 20px rgba(16,185,129,0.4); }
+  .btn.ghost {
+    background: rgba(255,255,255,0.05);
+    color: var(--text-main);
+    border: 1px solid var(--border-strong);
+  }
+  .btn.ghost:hover { background: rgba(255,255,255,0.1); box-shadow: none; }
+  .btn.small { padding: 6px 10px; font-size: 12px; border-radius: 8px; }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
   .hint {
     font-size: 12px;
@@ -418,7 +444,7 @@
     line-height: 1.5;
   }
 
-  /* -------- Списки -------- */
+  /* Списки */
   .list { margin-top: 12px; }
   .list-item {
     display: flex; align-items: center; gap: 12px;
@@ -440,6 +466,16 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     flex: 1;
+  }
+  .list-item .name .wildcard-tag {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(245,158,11,0.15);
+    color: #fcd34d;
+    font-family: ui-monospace, monospace;
+    margin-left: 6px;
+    vertical-align: middle;
   }
   .list-item .ip {
     font-family: ui-monospace, "SF Mono", Consolas, monospace;
@@ -471,7 +507,7 @@
     padding: 20px 0;
   }
 
-  /* -------- Статистика -------- */
+  /* Статистика */
   .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
@@ -502,7 +538,7 @@
     margin-top: 4px;
   }
 
-  /* -------- Логи -------- */
+  /* Логи */
   .log-list {
     max-height: 420px;
     overflow-y: auto;
@@ -540,8 +576,9 @@
   .log-badge.DENY    { background: rgba(245,158,11,0.15); color: #fcd34d; }
   .log-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .log-extra { color: var(--text-dim); flex-shrink: 0; }
+  .log-client { color: var(--text-dim); flex-shrink: 0; font-size: 11px; }
 
-  /* -------- Тосты -------- */
+  /* Тосты */
   .toasts {
     position: fixed;
     top: 20px; right: 20px;
@@ -600,6 +637,69 @@
     to { opacity: 0; transform: translateX(30px) scale(0.95); }
   }
 
+  /* CheProtect баннер */
+  .cheprotect {
+    margin: 0 28px 20px;
+    padding: 16px 18px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(239,68,68,0.05));
+    border: 1px solid rgba(239,68,68,0.4);
+    box-shadow: 0 0 30px rgba(239,68,68,0.15);
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    animation: cheprotect-pulse 3s ease-in-out infinite;
+  }
+  .cheprotect.hidden { display: none; }
+  @keyframes cheprotect-pulse {
+    0%, 100% { box-shadow: 0 0 30px rgba(239,68,68,0.15); }
+    50% { box-shadow: 0 0 40px rgba(239,68,68,0.3); }
+  }
+  .cheprotect-icon {
+    width: 40px; height: 40px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 12px;
+    background: rgba(239,68,68,0.2);
+    font-size: 20px;
+  }
+  .cheprotect-content { flex: 1; min-width: 0; }
+  .cheprotect-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fca5a5;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .cheprotect-title::before {
+    content: '🛡️';
+    font-size: 16px;
+  }
+  .cheprotect-text {
+    font-size: 13px;
+    color: #fecaca;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  .cheprotect-btn {
+    padding: 8px 14px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+    border: none;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .cheprotect-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(239,68,68,0.4);
+  }
+
   code {
     font-family: ui-monospace, "SF Mono", Consolas, monospace;
     font-size: 12px;
@@ -622,6 +722,18 @@
     margin-top: 6px;
     letter-spacing: 0.5px;
   }
+
+  .warning-text {
+    color: var(--accent-red);
+    font-size: 13px;
+    line-height: 1.5;
+    padding: 10px 12px;
+    background: rgba(239,68,68,0.08);
+    border: 1px solid rgba(239,68,68,0.25);
+    border-radius: 8px;
+    margin-top: 8px;
+  }
+  .warning-text strong { color: #fca5a5; }
 </style>
 </head>
 <body>
@@ -667,15 +779,24 @@
         <div class="subtitle">Локальный DNS-сервер · v{{ version }}</div>
       </div>
       <div class="header-actions">
+        <div class="user-info">{{ username }}</div>
         <button class="icon-btn" onclick="refreshAll()" title="Обновить">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="23 4 23 10 17 10"></polyline>
             <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
           </svg>
         </button>
+        <a href="/logout" class="icon-btn logout" title="Выйти">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+        </a>
       </div>
     </div>
 
+    <!-- Баннер интернета -->
     <div id="statusBanner" class="status-banner">
       <div class="status-banner-icon">
         <svg id="statusIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6ee7b7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -690,11 +811,16 @@
       <div id="toggleInternet" class="toggle" title="Переключить"></div>
     </div>
 
+    <!-- Вкладки -->
     <div class="tabs">
       <button class="tab active" data-tab="records">Записи</button>
       <button class="tab" data-tab="blocks">Блокировки</button>
       <button class="tab" data-tab="stats">Статистика</button>
       <button class="tab" data-tab="logs">Логи</button>
+      <button class="tab" data-tab="security" id="tabBtnSecurity">
+        Безопасность
+        <span class="badge-warn" id="securityBadge" style="display:none;"></span>
+      </button>
       <button class="tab" data-tab="settings">Настройки</button>
     </div>
 
@@ -704,14 +830,14 @@
         <div class="section">
           <div class="section-title">
             Локальные A-записи
-            <span class="hint-icon" data-tip="Домены, которые CheDNS превращает в указанный IP. Работают даже при выключенном интернете.">?</span>
+            <span class="hint-icon" data-tip="Домены, которые CheDNS превращает в указанный IP. Поддерживается wildcard: *.example.local покроет все поддомены.">?</span>
           </div>
           <div class="form-row">
-            <input id="recDomain" type="text" placeholder="example.local" autocomplete="off">
+            <input id="recDomain" type="text" placeholder="example.local или *.example.local" autocomplete="off">
             <input id="recIp" type="text" placeholder="192.168.1.10" autocomplete="off">
             <button class="btn" onclick="addRecord()">Добавить</button>
           </div>
-          <div class="hint">Только латиница и точки. Используйте <code>.local</code>, <code>.lan</code>, <code>.home</code> — эти зоны не резолвятся через интернет.</div>
+          <div class="hint">Только латиница и точки. Используйте <code>.local</code>, <code>.lan</code>, <code>.home</code>. Для wildcard добавьте <code>*.</code> в начало.</div>
           <div class="list" id="recordsList"></div>
         </div>
       </div>
@@ -731,6 +857,28 @@
           </div>
           <div class="hint">Например: <code>doubleclick.net</code>, <code>google-analytics.com</code>, <code>ads.facebook.com</code>.</div>
           <div class="list" id="blocksList"></div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">
+            Импорт блок-листов
+            <span class="hint-icon" data-tip="Вставь список доменов — по одному на строку. Поддерживается формат hosts (0.0.0.0 example.com) и AdBlock (||example.com^). Строки с # и ! игнорируются.">?</span>
+          </div>
+          <textarea id="importText" placeholder="# Список рекламных доменов
+doubleclick.net
+google-analytics.com
+googlesyndication.com
+||ads.example.com^
+0.0.0.0 tracker.example.net"></textarea>
+          <div class="form-row" style="margin-top: 10px;">
+            <button class="btn green" onclick="importBlocks()">📥 Импортировать</button>
+            <label class="btn ghost" style="cursor: pointer;">
+              📁 Загрузить файл
+              <input type="file" id="importFile" accept=".txt,.hosts,.list" style="display: none;" onchange="importFromFile(event)">
+            </label>
+            <button class="btn ghost" onclick="clearImport()">Очистить</button>
+          </div>
+          <div class="hint" id="importHint">Вставь список в поле выше, либо загрузи файл (.txt, .hosts, .list).</div>
         </div>
       </div>
     </div>
@@ -763,9 +911,78 @@
         <div class="section">
           <div class="section-title">
             Последние запросы
-            <span class="hint-icon" data-tip="Обновляется автоматически каждые 2 секунды. Показаны последние 200 запросов.">?</span>
+            <span class="hint-icon" data-tip="Обновляется автоматически каждые 2 секунды. Показаны последние 500 запросов.">?</span>
           </div>
           <div class="log-list" id="logList"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Безопасность -->
+    <div class="tab-content" id="tab-security">
+      <div class="tab-inner">
+        <div class="section">
+          <div class="section-title">
+            Смена пароля
+            <span class="hint-icon" data-tip="Минимум 6 символов. Используй пароль, который ты не используешь больше нигде.">?</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <input id="pwOld" type="password" placeholder="Текущий пароль" autocomplete="current-password">
+            <input id="pwNew" type="password" placeholder="Новый пароль (мин. 6 символов)" autocomplete="new-password">
+            <input id="pwNew2" type="password" placeholder="Новый пароль ещё раз" autocomplete="new-password">
+            <button class="btn" onclick="changePassword()">Сменить пароль</button>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">
+            Логин
+            <span class="hint-icon" data-tip="Имя пользователя для входа в панель. Минимум 3 символа.">?</span>
+          </div>
+          <div class="form-row">
+            <input id="userName" type="text" placeholder="admin">
+            <button class="btn" onclick="setUsername()">Сохранить</button>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">
+            Авторизация
+            <span class="hint-icon" data-tip="Если выключить — панель будет доступна без пароля. НЕ рекомендуется в офисе.">?</span>
+          </div>
+          <div class="status-banner" style="margin: 0; padding: 12px 14px;" id="authBanner">
+            <div class="status-banner-icon" id="authIcon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6ee7b7" stroke-width="2" stroke-linecap="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+            </div>
+            <div class="status-banner-text">
+              <div class="status-banner-title" id="authTitle">Авторизация включена</div>
+              <div class="status-banner-desc" id="authDesc">Панель требует вход</div>
+            </div>
+            <div class="toggle" id="toggleAuth" title="Переключить"></div>
+          </div>
+          <div class="warning-text" id="authWarning" style="display: none;">
+            <strong>⚠ Внимание:</strong> при отключении авторизации любой в сети сможет открыть панель и изменить настройки.
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">
+            Экспорт / импорт конфига
+            <span class="hint-icon" data-tip="Сохрани конфиг в файл для бэкапа или переноса на другой ПК. При импорте настройки авторизации НЕ переносятся (безопасность).">?</span>
+          </div>
+          <div class="form-row">
+            <a href="/api/export_config" class="btn ghost" style="text-decoration:none;">
+              💾 Скачать конфиг
+            </a>
+            <label class="btn ghost" style="cursor: pointer;">
+              📂 Загрузить конфиг
+              <input type="file" id="configFile" accept=".json" style="display: none;" onchange="importConfig(event)">
+            </label>
+          </div>
+          <div class="hint">Формат: <code>chedns_config.json</code>. Только записи, блокировки и upstream. Логин и пароль останутся текущие.</div>
         </div>
       </div>
     </div>
@@ -788,9 +1005,22 @@
           <div style="font-size: 13px; line-height: 2; color: var(--text-muted);">
             Версия: <code>{{ version }}</code><br>
             IP сервера: <code>{{ local_ip }}</code><br>
-            Веб-порт: <code>8080</code> · DNS-порт: <code>53</code>
+            Веб-порт: <code>8080</code> · DNS-порт: <code>53</code><br>
+            Протокол: <code>HTTPS</code>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- CheProtect баннер -->
+    <div id="cheprotectBanner" class="cheprotect {% if not default_password %}hidden{% endif %}">
+      <div class="cheprotect-icon">🛡️</div>
+      <div class="cheprotect-content">
+        <div class="cheprotect-title">CheProtect</div>
+        <div class="cheprotect-text">
+          У вас стоит базовый логин/пароль! Его могут подобрать и управлять DNS панелью! Поменяйте пока не поздно!
+        </div>
+        <button class="cheprotect-btn" onclick="goToSecurity()">Сменить пароль сейчас</button>
       </div>
     </div>
   </main>
@@ -800,7 +1030,10 @@
 
 <script>
 const $ = (s) => document.querySelector(s);
+const isDefaultPassword = {{ 'true' if default_password else 'false' }};
+let currentUsername = "{{ username }}";
 
+/* ---------- Toast ---------- */
 function toast(title, msg, kind = 'info') {
   const el = document.createElement('div');
   el.className = 'toast ' + kind;
@@ -808,8 +1041,8 @@ function toast(title, msg, kind = 'info') {
   el.innerHTML = `
     <div class="toast-icon">${icons[kind] || 'i'}</div>
     <div class="toast-content">
-      <div class="toast-title">${title}</div>
-      ${msg ? `<div class="toast-msg">${msg}</div>` : ''}
+      <div class="toast-title">${escapeHtml(title)}</div>
+      ${msg ? `<div class="toast-msg">${escapeHtml(msg)}</div>` : ''}
     </div>
   `;
   $('#toasts').appendChild(el);
@@ -819,13 +1052,19 @@ function toast(title, msg, kind = 'info') {
   }, 3500);
 }
 
+/* ---------- API ---------- */
 async function api(url, method = 'GET', body = null) {
   const opts = { method, headers: { 'Content-Type': 'application/json' } };
   if (body) opts.body = JSON.stringify(body);
   const r = await fetch(url, opts);
+  if (r.status === 401) {
+    window.location.href = '/login';
+    return { ok: false };
+  }
   return await r.json();
 }
 
+/* ---------- Загрузка ---------- */
 async function checkServer() {
   const status = $('#loaderStatus');
   try {
@@ -851,8 +1090,14 @@ function showPanel() {
   const wrap = $('#panelWrap');
   wrap.classList.add('visible');
   setTimeout(() => wrap.classList.add('expanded'), 80);
+
+  // Бейдж на вкладке Безопасность
+  if (isDefaultPassword) {
+    $('#securityBadge').style.display = 'inline-block';
+  }
 }
 
+/* ---------- Рендеры ---------- */
 function renderRecords(records) {
   const list = $('#recordsList');
   const keys = Object.keys(records);
@@ -860,15 +1105,20 @@ function renderRecords(records) {
     list.innerHTML = '<div class="empty">Пока нет записей. Добавьте первую сверху.</div>';
     return;
   }
-  list.innerHTML = keys.map(d => `
+  list.innerHTML = keys.map(d => {
+    const isWildcard = d.startsWith('*.');
+    return `
     <div class="list-item">
-      <div class="name">${escapeHtml(d)}</div>
+      <div class="name">
+        ${escapeHtml(d)}
+        ${isWildcard ? '<span class="wildcard-tag">WILDCARD</span>' : ''}
+      </div>
       <div class="ip">${escapeHtml(records[d])}</div>
       <button class="remove" onclick="delRecord('${escapeAttr(d)}')" title="Удалить">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg>
       </button>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
 }
 
 function renderBlocks(blocks) {
@@ -898,6 +1148,15 @@ function renderStatus(enabled) {
   $('#statusIcon').setAttribute('stroke', enabled ? '#6ee7b7' : '#fca5a5');
 }
 
+function renderAuth(enabled) {
+  const banner = $('#authBanner');
+  $('#authTitle').textContent = enabled ? 'Авторизация включена' : 'Авторизация ВЫКЛЮЧЕНА';
+  $('#authDesc').textContent = enabled ? 'Панель требует вход' : 'Любой в сети имеет доступ';
+  $('#toggleAuth').classList.toggle('off', !enabled);
+  $('#authIcon').setAttribute('stroke', enabled ? '#6ee7b7' : '#fca5a5');
+  $('#authWarning').style.display = enabled ? 'none' : 'block';
+}
+
 function renderStats(s) {
   $('#stTotal').textContent = s.total;
   $('#stLocal').textContent = s.local;
@@ -922,6 +1181,7 @@ function renderLogs(logs) {
       <span class="log-time">${l.time}</span>
       <span class="log-badge ${l.kind}">${l.kind}</span>
       <span class="log-name">${escapeHtml(l.name)}</span>
+      ${l.client ? `<span class="log-client">${escapeHtml(l.client)}</span>` : ''}
       ${l.extra ? `<span class="log-extra">${escapeHtml(l.extra)}</span>` : ''}
     </div>
   `).join('');
@@ -936,13 +1196,17 @@ function escapeAttr(s) {
   return String(s).replace(/'/g, "\\'").replace(/\\/g, "\\\\");
 }
 
+/* ---------- Обновление ---------- */
 async function refreshAll() {
   try {
     const [cfg, st] = await Promise.all([api('/api/config'), api('/api/stats')]);
     renderRecords(cfg.records);
     renderBlocks(cfg.blocked);
     renderStatus(cfg.internet_enabled);
+    renderAuth(cfg.auth_enabled);
     $('#upstream').value = cfg.upstream_dns;
+    $('#userName').value = cfg.username;
+    currentUsername = cfg.username;
     renderStats(st);
   } catch (e) {
     toast('Ошибка', 'Не удалось загрузить конфиг', 'error');
@@ -956,6 +1220,7 @@ async function refreshStats() {
   try { renderStats(await api('/api/stats')); } catch (e) {}
 }
 
+/* ---------- Записи ---------- */
 async function addRecord() {
   const domain = $('#recDomain').value.trim();
   const ip = $('#recIp').value.trim();
@@ -976,6 +1241,7 @@ async function delRecord(domain) {
   refreshAll();
 }
 
+/* ---------- Блокировки ---------- */
 async function addBlock() {
   const domain = $('#blockDomain').value.trim();
   if (!domain) return toast('Пусто', 'Укажите домен', 'warn');
@@ -994,6 +1260,104 @@ async function delBlock(domain) {
   refreshAll();
 }
 
+/* ---------- Импорт блок-листов ---------- */
+async function importBlocks() {
+  const text = $('#importText').value;
+  if (!text.trim()) return toast('Пусто', 'Вставьте список доменов', 'warn');
+  const r = await api('/api/import_blocks', 'POST', { text });
+  if (r.ok) {
+    toast('Импорт завершён', `Добавлено ${r.added} из ${r.total}`, 'success');
+    $('#importText').value = '';
+    refreshAll();
+  } else toast('Ошибка', r.error || 'Не удалось', 'error');
+}
+
+function importFromFile(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    $('#importText').value = e.target.result;
+    $('#importHint').textContent = `Загружен файл: ${file.name} (${Math.round(file.size / 1024)} КБ)`;
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+function clearImport() {
+  $('#importText').value = '';
+  $('#importHint').textContent = 'Вставь список в поле выше, либо загрузи файл (.txt, .hosts, .list).';
+}
+
+/* ---------- Безопасность ---------- */
+async function changePassword() {
+  const oldPw = $('#pwOld').value;
+  const newPw = $('#pwNew').value;
+  const newPw2 = $('#pwNew2').value;
+  if (!oldPw || !newPw || !newPw2) return toast('Заполните все поля', '', 'warn');
+  const r = await api('/api/change_password', 'POST', {
+    old_password: oldPw, new_password: newPw, new_password2: newPw2
+  });
+  if (r.ok) {
+    toast('Пароль изменён', 'Баннер CheProtect скрыт', 'success');
+    $('#pwOld').value = ''; $('#pwNew').value = ''; $('#pwNew2').value = '';
+    $('#cheprotectBanner').classList.add('hidden');
+    $('#securityBadge').style.display = 'none';
+  } else toast('Ошибка', r.error || 'Не удалось', 'error');
+}
+
+async function setUsername() {
+  const name = $('#userName').value.trim();
+  if (name.length < 3) return toast('Логин короткий', 'Минимум 3 символа', 'warn');
+  const r = await api('/api/settings', 'POST', { username: name });
+  if (r.ok) {
+    toast('Логин изменён', `Новый: ${name}`, 'success');
+    currentUsername = name;
+    refreshAll();
+  } else toast('Ошибка', r.error || 'Не удалось', 'error');
+}
+
+async function toggleAuth() {
+  const enabled = $('#toggleAuth').classList.contains('off'); // если off — включаем
+  if (!enabled) {
+    // хотим выключить — подтверждение
+    if (!confirm('Вы уверены, что хотите ОТКЛЮЧИТЬ авторизацию? Панель станет доступна без пароля.')) return;
+  }
+  const r = await api('/api/settings', 'POST', { auth_enabled: enabled });
+  if (r.ok) {
+    toast(enabled ? 'Авторизация включена' : 'Авторизация выключена',
+          enabled ? 'Панель требует вход' : 'Доступ без пароля!',
+          enabled ? 'success' : 'warn');
+    refreshAll();
+  }
+}
+
+async function importConfig(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const formData = new FormData();
+  formData.append('file', file);
+  try {
+    const r = await fetch('/api/import_config', { method: 'POST', body: formData });
+    const data = await r.json();
+    if (data.ok) {
+      toast('Конфиг импортирован', 'Настройки применены', 'success');
+      refreshAll();
+    } else toast('Ошибка импорта', data.error || 'Не удалось', 'error');
+  } catch (e) {
+    toast('Ошибка', e.message, 'error');
+  }
+  event.target.value = '';
+}
+
+function goToSecurity() {
+  document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(x => x.classList.remove('active'));
+  document.querySelector('.tab[data-tab="security"]').classList.add('active');
+  $('#tab-security').classList.add('active');
+}
+
+/* ---------- Upstream ---------- */
 async function setUpstream() {
   const ip = $('#upstream').value.trim();
   const r = await api('/api/upstream', 'POST', { ip });
@@ -1001,6 +1365,7 @@ async function setUpstream() {
   else toast('Ошибка', r.error || 'Неверный IP', 'error');
 }
 
+/* ---------- Интернет ---------- */
 $('#toggleInternet').addEventListener('click', async () => {
   const r = await api('/api/toggle_internet', 'POST');
   if (r.ok) {
@@ -1013,6 +1378,7 @@ $('#toggleInternet').addEventListener('click', async () => {
   }
 });
 
+/* ---------- Вкладки ---------- */
 document.querySelectorAll('.tab').forEach(t => {
   t.addEventListener('click', () => {
     document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
@@ -1024,11 +1390,13 @@ document.querySelectorAll('.tab').forEach(t => {
   });
 });
 
+/* ---------- Enter ---------- */
 $('#recDomain').addEventListener('keydown', e => { if (e.key === 'Enter') $('#recIp').focus(); });
 $('#recIp').addEventListener('keydown', e => { if (e.key === 'Enter') addRecord(); });
 $('#blockDomain').addEventListener('keydown', e => { if (e.key === 'Enter') addBlock(); });
-$('#upstream').addEventListener('keydown', e => { if (e.key === 'Enter') setUpStream(); });
+$('#upstream').addEventListener('keydown', e => { if (e.key === 'Enter') setUpstream(); });
 
+/* ---------- Старт ---------- */
 checkServer();
 setInterval(refreshLogs, 2000);
 setInterval(refreshStats, 3000);
